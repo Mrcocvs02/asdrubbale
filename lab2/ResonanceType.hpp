@@ -3,7 +3,8 @@
 class ResonanceType : ParticleType{
     const  double fWidth;
     public:
-    double get_fWidth() const{return fWidth;}
+    ResonanceType(double fWidth_);
+    double get_fWidth() const{return fWidth;};
     void Print()const;
 
-}
+};
