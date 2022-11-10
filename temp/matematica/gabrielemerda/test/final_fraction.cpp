@@ -1,0 +1,123 @@
+#include <iostream>
+#include <vector>
+
+
+class polynom {
+    public:
+    std::vector <double> v;
+    void structure (int n){
+        int i =0; 
+        v.erase(v.begin(), v.end());       
+        while (i<=n)  {
+            double value;
+            std::cin >> value;
+            v.push_back(value);
+            i++;
+        };
+    }
+    std::vector <double> extract (){
+        return v;
+    }
+
+};
+void stampa (std::vector <double> equation){
+    int exponent; 
+    int correct=0;
+        for (exponent = equation.size()-1;exponent>=0; exponent--){
+            if (exponent >=2){
+            std::cout << equation[correct] <<"X^" << exponent << " + ";
+            }
+            else if (exponent ==1){
+            std::cout << equation[correct] <<"X" << " + ";
+            }
+            else if (exponent ==0){
+                std::cout << equation[correct] << '\n';
+            }
+            else {
+                break;
+            }
+            correct++;
+        }
+        correct=0;
+};
+
+std::vector<double> division (std::vector<double> v1, std::vector<double> v2, bool c){
+    int dim2= v2.size();
+    /*int dim_result = initial_dim1-initial_dim2;*/  
+    std::vector<double> partial_subtructor;
+    std::vector<double> partial_rest;
+    std::vector<double> result;
+    std::vector<double> divisor;
+        for (int i=0; i<v1.size(); i++){
+            divisor [i] = v1[i];
+        }
+        while(divisor.size()>=v2.size()){
+            partial_subtructor.clear();
+            partial_rest.clear();
+            double multiplier = divisor[0]/v2[0];
+
+            for (int i=0; i<dim2;i++){
+                partial_subtructor.push_back(multiplier * v2[i]);
+            };
+
+            for (int i=0; i<partial_subtructor.size();i++){
+                partial_rest.push_back(divisor[i]-partial_subtructor[i]);
+            };
+
+            for (int i = partial_subtructor.size(); i<divisor.size(); i++){
+                partial_rest.push_back(divisor[i]);
+            };
+
+            while (partial_rest[0]==0){
+                partial_rest.erase(partial_rest.begin());
+            };
+
+            for (int i=0; i<partial_rest.size();i++){
+                divisor[i]=partial_rest[i];
+            };
+
+            result.push_back(multiplier); 
+
+        };
+
+        switch (c){
+            case true : 
+                return divisor;
+                break; 
+            case false :
+                return partial_rest;
+                break;
+        };         
+};
+
+int main () {
+    int n1; 
+    int n2;
+    std::vector <double> v1;    
+    std::vector <double> v2;
+    std::vector <double> final_result;
+    std::vector <double> final_rest;    
+    polynom eq;         
+    std::cout <<"insert the degree of the first polynom (greatest degree)"<<'\n';
+    std::cin >> n1;
+    std::cout <<"insert the degree of the second polynom (smallest degree)"<<'\n';
+    std::cin >> n2;
+    std::cout <<"insert the coefficients of the first polynom of degree"<< n1 <<'\n';
+    eq.structure(n1);
+    std::cout <<"your first polynom is:" <<'\n';
+    v1 = eq.extract();
+    stampa(v1);
+    std::cout <<"insert the coefficients of the second polynom of degree"<< n2 <<'\n';
+    eq.structure(n2);
+    std::cout <<"your second polynom is:" <<'\n';    
+    v2 = eq.extract();
+    stampa(v2);
+    final_result = division(v1,v2, true);
+    final_rest = division(v1,v2, false);    
+    std::cout << final_result[0]<<'\n';
+}
+
+
+/*            while (divisor[0]==0){
+                divisor.erase(divisor.begin());//cancella dal divisor i coefficienti uguali a 0 []
+            }*/
