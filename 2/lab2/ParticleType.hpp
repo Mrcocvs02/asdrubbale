@@ -16,7 +16,7 @@ public:
 
     const char* Get_fName() const { return fName; };
     double Get_fCharge() const { return fCharge; };
-    int Get_fMass() const { return fMass; };
+    double Get_fMass() const { return fMass; };
     virtual double Get_Width() const{return 0;};
 
     virtual void Print() const;

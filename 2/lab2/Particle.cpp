@@ -4,19 +4,24 @@
 #include <cstdlib>
 
 Particle::Particle(char *name, double Px, double Py, double Pz)
-    : fPx{Px}, fPy{Py}, fPz{Pz} {
+    : 
+    fPx{Px}, fPy{Py}, fPz{Pz} {
   fIndex = FindParticle(name);
 }
+Particle::Particle(char *name):
+  fIndex{FindParticle(name)},
+   fPx{0}, fPy{0}, fPz{0}{}
+
 
 int Particle::fNParticleType = 0;
-
+ 
 std::vector<ParticleType *> Particle::fParticleType = {};
 
 int Particle::FindParticle(char *name) {
   int index;
   auto i = std::find_if(fParticleType.begin(), fParticleType.end(),
                         [name](auto temp) {
-                          bool check = ((temp->getName()) == name);
+                          bool check = ((temp->Get_fName()) == name);
                           return check;
                         });
   if (i != fParticleType.end()) {
@@ -27,17 +32,30 @@ int Particle::FindParticle(char *name) {
   return index;
 }
 
-void Particle::AddParticleType(char *name, double mass, double charge,
-                               double width) {
+void Particle::AddParticleType(char *name, double mass, int charge, double width) {
 
   int size = fParticleType.size();
 
   ParticleType *newPart;
-  if (width == 0.) {
-    newPart = new ParticleType(name, mass, charge);
-  } else {
     newPart = new ResonanceType(name, mass, charge, width);
+  if (size != 0) {
+    int index = FindParticle(name);
+    if (index == -1) {
+      fParticleType.push_back(newPart);
+    } else {
+      std::cout << "The particle is already there" << '\n';
+    }
+  } else {
+    fParticleType.push_back(newPart);
   }
+  ++fNParticleType;
+}
+void Particle::AddParticleType(char *name, double mass, int charge) {
+
+  int size = fParticleType.size();
+
+  ParticleType *newPart;
+    newPart = new ParticleType(name, mass, charge);
   if (size != 0) {
     int index = FindParticle(name);
     if (index == -1) {

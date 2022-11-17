@@ -80,9 +80,10 @@
 ./Main_cpp.so: /home/mrcovss/root/include/TVectorFfwd.h
 ./Main_cpp.so: /home/mrcovss/root/include/TVectorDfwd.h
 ./Main_cpp.so: /home/mrcovss/root/include/TFitResultPtr.h
-./Main_cpp.so: /home/mrcovss/root/include/TH3F.h
-./Main_cpp.so: /home/mrcovss/root/include/TH3.h
-./Main_cpp.so: /home/mrcovss/root/include/TAtt3D.h
+./Main_cpp.so: /home/mrcovss/root/include/TH2F.h
+./Main_cpp.so: /home/mrcovss/root/include/TH2.h
+./Main_cpp.so: /home/mrcovss/root/include/TMatrixFBasefwd.h
+./Main_cpp.so: /home/mrcovss/root/include/TMatrixDBasefwd.h
 ./Main_cpp.so: /home/mrcovss/root/include/TMath.h
 ./Main_cpp.so: /home/mrcovss/root/include/TError.h
 ./Main_cpp.so: /home/mrcovss/root/include/TRandom.h
